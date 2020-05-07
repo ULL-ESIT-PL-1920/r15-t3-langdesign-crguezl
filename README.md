@@ -4,9 +4,13 @@ Modifica la gramática corrigiendo los errores que veas, de manera que genere fr
 
 1. `a[4][b+c][5] = c[2][3]`
 2. `a.b.c = a[x]`
-3. `a.b[x*y].d = c.d[3][1].e(temp)`
+3. `a.b[x*y].d = c.d[3][1].e(temp)` 
+4. à.b = f(x).z[4]
 
 Procura que exprese bien la precedencia de operadores (vigila la asignación)
+
+a = b[4+5]
+[]
 
 
 ## Grammar
@@ -25,19 +29,25 @@ Procura que exprese bien la precedencia de operadores (vigila la asignación)
               
 <declaration> ::= 'var' WORD ('=' <expr>)?
 
-<expr> ::= <term> (('==', '!=', '>', '>=', '<', '<=', '=') <term>)*
+<expr> = (<leftVal> '=')* <comp>
+
+<leftVal> = WORD ('.' WORD | '[' <expr> ']')*
+
+<comp> ::= <term> (('==', '!=', '>', '>=', '<', '<=') <term>)*
 
 <term> ::= <sum> (('+', '-') <sum>)*
 
 <sum> ::= <fact> (('*', '/') <fact>)*
 
-<fact> ::= <value> | <word> <apply> | <parenthesis> | <array> // Added by: Casiano
 
 <apply> ::= '(' <expr> (',' <expr>)* ')'<apply> | '.'<word><apply> | empty
 
 <array> ::= '[' ']' | '[' <expr> (',' <expr> )*] // Added by Casiano
 
 <parenthesis> ::= '(' <expr> ')'
+
+<fact> ::=  (WORD | VALUE | <array> | <parenthesis>) ('.' WORD | '[' <expr> ']'| <apply>)*
+
 ```
 
 ## Tokens
