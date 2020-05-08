@@ -9,10 +9,6 @@ Modifica la gramática corrigiendo los errores que veas, de manera que genere fr
 
 Procura que exprese bien la precedencia de operadores (vigila la asignación)
 
-a = b[4+5]
-[]
-
-
 ## Grammar
 
 ```ruby
