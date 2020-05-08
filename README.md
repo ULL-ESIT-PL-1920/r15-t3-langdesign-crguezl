@@ -17,33 +17,31 @@ Procura que exprese bien la precedencia de operadores (vigila la asignación)
 <block> ::= '{' <statement>* '}'  // Modified Casiano
 
 <statement> ::=
-               <declaration> |
+              'var' WORD ('=' <expr>)? |
+              'function' <word> '(' <word> (',' <word>)* ')' <block> |
               "if" <parenthesis> <block> ("else" "if" <block>)* ('else' <block>)? |
               "while" <parenthesis> <block> |
-              'function' <word> '(' <word> (',' <word>)* ')' <block> |
               <expr> ";"
-              
-<declaration> ::= 'var' WORD ('=' <expr>)?
 
 <expr> = (<leftVal> '=')* <comp> // Hay que esperar a ver el '=' para saber que es un <leftVal>  y no un <comp>
 
 <leftVal> = WORD ('.' WORD | '[' <term> ']')*
 
-<comp> ::= <term> (('==', '!=', '>', '>=', '<', '<=') <term>)*
+<comp> ::= <term> (('==', '!=', '>', '>=', '<', '<=') <term>)?
 
 <term> ::= <sum> (('+', '-') <sum>)*
 
 <sum> ::= <fact> (('*', '/') <fact>)*
 
+<fact> ::=  (WORD | VALUE | <array> | <object> | <parenthesis>) ('.' WORD | '[' <expr> ']'| <apply>)*
 
-<apply> ::= '(' <expr> (',' <expr>)* ')'<apply> | '.'<word><apply> | empty
+<apply> ::= '(' <expr> (',' <expr>)* ')'<apply> | empty
 
-<array> ::= '[' ']' | '[' <expr> (',' <expr> )*] // Added by Casiano
+<array> ::= '[' ']' | '[' <expr> (',' <expr> )*]
 
 <parenthesis> ::= '(' <expr> ')'
 
-<fact> ::=  (WORD | VALUE | <array> | <parenthesis>) ('.' WORD | '[' <expr> ']'| <apply>)*
-
+<object> ::= '{' (WORD ':' <comp>)? (',' WORD ':' <comp>)*  '}'
 ```
 
 ## Tokens
