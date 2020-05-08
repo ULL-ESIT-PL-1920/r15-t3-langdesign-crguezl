@@ -14,7 +14,7 @@ Procura que exprese bien la precedencia de operadores (vigila la asignación)
 ```ruby
 <program> ::= <block>
 
-<block> ::= '{' <statement>* '}'  // Modified Casiano
+<block> ::= '{' (<statement> ';')* '}'  // Modified Casiano
 
 <statement> ::=
               'var' WORD ('=' <expr>)? |
