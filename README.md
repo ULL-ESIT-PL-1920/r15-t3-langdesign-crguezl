@@ -29,9 +29,9 @@ a = b[4+5]
               
 <declaration> ::= 'var' WORD ('=' <expr>)?
 
-<expr> = (<leftVal> '=')* <comp>
+<expr> = (<leftVal> '=')* <comp> // Hay que esperar a ver el '=' para saber que es un <leftVal>  y no un <comp>
 
-<leftVal> = WORD ('.' WORD | '[' <expr> ']')*
+<leftVal> = WORD ('.' WORD | '[' <term> ']')*
 
 <comp> ::= <term> (('==', '!=', '>', '>=', '<', '<=') <term>)*
 
